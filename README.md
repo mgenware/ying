@@ -26,8 +26,8 @@ Example:
 var ying = require('ying');
 
 // Embeding a JavaScript expression (using d to reference arguments, _e(str) to escape string for HTML))
-var func = ying.compile('<p>{{= d.id ? d.id + "~" + d.name : d.error }}</p>');
-console.log(func({id: 123, name: 'Mgen'}));
+var func = ying.compile('<p>{{= _e(d.id ? d.id + "~" + d.name : d.error) }}</p>');
+console.log(func({id: 123, name: 'Mgen >>>'}));
 console.log(func({error: 'Fun with ying'}));
 ```
 
@@ -45,7 +45,7 @@ var ying = require('ying');
 
 // Embeding a JavaScript function (using d to reference arguments, _e(str) to escape string for HTML))
 // Populating a HTML list
-var func = ying.compile('<ul>{{# var s = ""; for(var i in d.users) s += "<li>" + d.users[i] + "</li>"; return s; }}</ul>');
+var func = ying.compile('<ul>{{# var s = ""; for(var i in d.users) s += "<li>" + _e(d.users[i]) + "</li>"; return s; }}</ul>');
 console.log(func({users: ['aaa', 'b', 'cccc', 'dd']}));
 ```
 
