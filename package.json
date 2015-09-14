@@ -12,7 +12,6 @@
         "url": "https://github.com/mgenware/ying.git"
     },
     "license": "MIT",
-    "bin": "src/ying_main.js",
     "dependencies": {
         "js-string-escape": "^1.0.0"
     }
