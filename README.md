@@ -1,9 +1,20 @@
 # ying
 Another simple Node.js template engine.
 
-# Examples
-`ying.compile`: compile a template string to a JavaScript function.  
-`{{xxx}}`: reference a value named 'xxx' and auto escape this string for HTML.
+## Installation
+```
+npm install ying
+```
+
+## Run tests
+```
+npm test
+```
+*This project is tested on Node.js 4.1.1*
+
+# Usage
+* `ying.compile(templateStr)` compiles a template string to a JavaScript function.  
+* `{{xxx}}` reference a property named 'xxx' and escape its value for HTML.
 
 Example:
 ```javascript
@@ -19,13 +30,15 @@ Output:
 ```
 
 
-`{{= }}`: Embeding a JavaScript expression directly (you can use `d` to reference arguments and `_e(str)` to escape string for HTML).
+* `{{= }}` embeds a JavaScript expression inside template string.
+* `d.<property>` references properties in user argument(so `d` is a reserved word inside template JavaScript expressions).
+* `_e(str)` use this to escape string for HTML inside template(so `_e` is a reserved word inside template JavaScript expressions).
 
 Example:
 ```javascript
 var ying = require('ying');
 
-// Embeding a JavaScript expression (using d to reference arguments, _e(str) to escape string for HTML))
+// Embeds a JavaScript expression (use d to reference arguments, _e(str) to escape string for HTML))
 var func = ying.compile('<p>{{= _e(d.id ? d.id + "~" + d.name : d.error) }}</p>');
 console.log(func({id: 123, name: 'Mgen >>>'}));
 console.log(func({error: 'Fun with ying'}));
@@ -37,14 +50,15 @@ Output:
 <p>Fun with ying</p>
 ```
 
-`{{# }}`: define a mini-function to return something.
+
+* `{{# }}` defines a mini-function to return something.
 
 Example:
 ```javascript
 var ying = require('ying');
 
-// Embeding a JavaScript function (using d to reference arguments, _e(str) to escape string for HTML))
-// Populating a HTML list
+// Embeds a JavaScript function (using d to reference arguments, _e(str) to escape string for HTML))
+// Populates a HTML list
 var func = ying.compile('<ul>{{# var s = ""; for(var i in d.users) s += "<li>" + _e(d.users[i]) + "</li>"; return s; }}</ul>');
 console.log(func({users: ['aaa', 'b', 'cccc', 'dd']}));
 ```
