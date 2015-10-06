@@ -57,8 +57,8 @@ Example:
 ```javascript
 var ying = require('ying');
 
-// Embeds a JavaScript function (using d to reference arguments, _e(str) to escape string for HTML))
-// Populates a HTML list
+// Embeds a JavaScript function (use d to reference arguments, _e(str) to escape string for HTML))
+// Populates an HTML list
 var func = ying.compile('<ul>{{# var s = ""; for(var i in d.users) s += "<li>" + _e(d.users[i]) + "</li>"; return s; }}</ul>');
 console.log(func({users: ['aaa', 'b', 'cccc', 'dd']}));
 ```
