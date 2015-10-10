@@ -38,6 +38,21 @@ describe('ying test', function() {
             src: '<body>{{=d.content}}</body>',
             pas: [{content: '<h1>hello</h1>'}],
             exp: ['<body><h1>hello</h1></body>']
+        },
+        {
+            src: ' {{a}} ',
+            pas: [{a: 'a'}],
+            exp: [' a ']
+        },
+        {
+            src: '{{a}} ',
+            pas: [{a: 'a'}],
+            exp: ['a ']
+        },
+        {
+            src: '{{=d.a}} ',
+            pas: [{a: 'a'}],
+            exp: ['a ']
         }
     ];
 
