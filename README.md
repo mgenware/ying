@@ -67,3 +67,30 @@ Output:
 ```html
 <ul><li>aaa</li><li>b</li><li>cccc</li><li>dd</li></ul>
 ```
+
+# More Examples
+## Composite Template(Includes)
+ying can also accomplish something like [Jade's Includes](http://jade-lang.com/reference/includes/).
+Sample code:
+```javascript
+var ying = require('ying');
+
+// create 2 template functions
+// page_content in parentTemplate will be set by result of childTemplate
+var parentTemplate = ying.compile('<html><head><title>{{page_title}}</title><body>{{=d.page_content}}</body></html>');
+var childTemplate = ying.compile('<h1>{{name}}</h1><p>{{description}}</p>');
+
+// 2 data object, each for their own template function
+function compositeTemplate(parentData, childData) {
+    // setting result of childTemplate to parentData.page_content
+    parentData.page_content = childTemplate(childData);
+    return parentTemplate(parentData);
+}
+
+var result = compositeTemplate({page_title: 'Title of this page'}, {name: 'Mgen', description: 'hello'});
+console.log(result);
+```
+Output the full generated HTML:
+```html
+<html><head><title>Title of this page</title><body><h1>Mgen</h1><p>hello</p></body></html>
+```
