@@ -53,15 +53,30 @@ describe('ying test', function() {
             src: '{{=d.a}} ',
             pas: [{a: 'a'}],
             exp: ['a ']
+        },
+        {
+            src: '{{=d.flag\n?\n"true"\n:\n"false"}}',
+            pas: [{}],
+            exp: ['{{=d.flag\n?\n"true"\n:\n"false"}}']
+        },
+        {
+            src: '{{=d.flag\n?\n"true"\n:\n"false"}}',
+            pas: [{}],
+            exp: ['false'],
+            opt: {multiline: true}
         }
     ];
 
     var i = 1;
     specData.forEach(function (specItem) {
-        var func = ying.compile(specItem.src);
+        var func = ying.compile(specItem.src, specItem.opt);
         specItem.pas.forEach(function (pasItem, index) {
             it('spec ' + i++, function () {
-                assert.equal(func(pasItem), specItem.exp[index]);
+                var specOpt = null;
+                if (specItem.opt) {
+                    specOpt = specItem.opt[index];
+                }
+                assert.equal(func(pasItem), specItem.exp[index], specOpt);
             });
         });
     });
