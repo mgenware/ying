@@ -1,4 +1,8 @@
 # ying ChangeLog
+## 0.0.8 2015-11-6
+* Fix wrong result in multiline mode.
+* Make all tests running in both singleline and multiline mode.
+* Add `opt.logging` in README.md.
 
 ## 0.0.7 2015-11-5
 * Add `opt.multiline` option.

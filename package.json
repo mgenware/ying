@@ -1,6 +1,6 @@
 {
   "name": "ying",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Another simple Node.js template engine",
   "main": "lib/main.js",
   "author": "Mgen (https://www.mgenware.com)",

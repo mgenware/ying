@@ -15,6 +15,7 @@ npm test
 # Usage
 * `ying.compile(templateStr, opt)` compiles a template string to a JavaScript function. Available options:
     * `multiline` default false, if true, ying will search `{{...}}` expressions over multiple lines.
+    * `logging` if true, show debugging logs on standard output. 
 
 * `{{xxx}}` reference a property named 'xxx' and escape its value for HTML.
 

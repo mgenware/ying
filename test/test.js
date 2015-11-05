@@ -1,13 +1,24 @@
 var ying = require('../lib/main');
 var assert = require('assert');
+var util = require('util');
+
+var specIndex = 1;
+var specGroupIndex = 1;
+
+function run_spec(desc, func, pas, result) {
+    it(util.format('spec(%d) group(%d) %s', specIndex, specGroupIndex, desc), function () {
+        assert.equal(func(pas), result);
+        specIndex++;
+    });
+}
 
 describe('ying test', function() {
 
     var specData = [
         {
             src: '<p>{{name}}</p>',
-            pas: [{name: 'Mgen >>>'}],
-            exp: ['<p>Mgen &gt;&gt;&gt;</p>']
+            pas: [{name: 'Mgen >>>'}, '', null],
+            exp: ['<p>Mgen &gt;&gt;&gt;</p>', '<p></p>', '<p></p>']
         },
         {
             src: '<p>{{= _e(d.id ? d.id + "~" + d.name : d.error) }}</p>',
@@ -57,27 +68,31 @@ describe('ying test', function() {
         {
             src: '{{=d.flag\n?\n"true"\n:\n"false"}}',
             pas: [{}],
-            exp: ['{{=d.flag\n?\n"true"\n:\n"false"}}']
-        },
-        {
-            src: '{{=d.flag\n?\n"true"\n:\n"false"}}',
-            pas: [{}],
-            exp: ['false'],
-            opt: {multiline: true}
+            exp_s: ['{{=d.flag\n?\n"true"\n:\n"false"}}'],
+            exp_m: ['false'],
+            multiline: true
         }
     ];
 
-    var i = 1;
     specData.forEach(function (specItem) {
-        var func = ying.compile(specItem.src, specItem.opt);
+        var func_s = ying.compile(specItem.src);
+        var func_m = ying.compile(specItem.src, {multiline: true});
+
         specItem.pas.forEach(function (pasItem, index) {
-            it('spec ' + i++, function () {
-                var specOpt = null;
-                if (specItem.opt) {
-                    specOpt = specItem.opt[index];
-                }
-                assert.equal(func(pasItem), specItem.exp[index], specOpt);
-            });
+            var exp_s, exp_m;
+            if (specItem.multiline) {
+                exp_s = specItem.exp_s;
+                exp_m = specItem.exp_m;
+            } else {
+                exp_s = exp_m = specItem.exp;
+            }
+
+            // run singleline tests
+            run_spec('singleline', func_s, pasItem, exp_s[index]);
+            // run multiline tests
+            run_spec('multiline', func_m, pasItem, exp_m[index]);
+
+            specGroupIndex++;
         });
     });
 });
