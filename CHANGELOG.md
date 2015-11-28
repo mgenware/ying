@@ -1,4 +1,8 @@
 # ying ChangeLog
+## 0.1.0 2015-11-29
+* **(Breaking)** Remove opt.multiline, multiline expression is enabled by default.
+* Fix compilation error when using ES6 expression.
+
 ## 0.0.8 2015-11-6
 * Fix wrong result in multiline mode.
 * Make all tests running in both singleline and multiline mode.
