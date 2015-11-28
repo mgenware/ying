@@ -5,8 +5,8 @@ var util = require('util');
 var specIndex = 1;
 var specGroupIndex = 1;
 
-function run_spec(desc, func, pas, result) {
-    it(util.format('spec(%d) group(%d) %s', specIndex, specGroupIndex, desc), function () {
+function run_spec(func, pas, result) {
+    it(util.format('spec(%d) group(%d)', specIndex, specGroupIndex), function () {
         assert.equal(func(pas), result);
         specIndex++;
     });
@@ -68,29 +68,29 @@ describe('ying test', function() {
         {
             src: '{{=d.flag\n?\n"true"\n:\n"false"}}',
             pas: [{}],
-            exp_s: ['{{=d.flag\n?\n"true"\n:\n"false"}}'],
-            exp_m: ['false'],
-            multiline: true
+            exp: ['false']
+        },
+        {
+            src: `{{# var res = '';
+            if (d.flag) {
+                res += '1';
+                if (d.flag2) {
+                    res += '2';
+                }
+            }
+            return res;
+         }}`,
+            pas: [{flag: 1, flag2: 1}, null, {flag: 1}, {flag2: 1}],
+            exp: ['12', '', '1', '']
         }
     ];
 
     specData.forEach(function (specItem) {
-        var func_s = ying.compile(specItem.src);
-        var func_m = ying.compile(specItem.src, {multiline: true});
+        var func = ying.compile(specItem.src);
+        var exp = specItem.exp;
 
         specItem.pas.forEach(function (pasItem, index) {
-            var exp_s, exp_m;
-            if (specItem.multiline) {
-                exp_s = specItem.exp_s;
-                exp_m = specItem.exp_m;
-            } else {
-                exp_s = exp_m = specItem.exp;
-            }
-
-            // run singleline tests
-            run_spec('singleline', func_s, pasItem, exp_s[index]);
-            // run multiline tests
-            run_spec('multiline', func_m, pasItem, exp_m[index]);
+            run_spec(func, pasItem, exp[index]);
 
             specGroupIndex++;
         });
