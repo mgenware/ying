@@ -71,7 +71,7 @@ describe('ying test', function() {
             exp: ['false']
         },
         {
-            src: `{{# var res = '';
+            src: `{{# let res = '';
             if (d.flag) {
                 res += '1';
                 if (d.flag2) {
@@ -82,6 +82,11 @@ describe('ying test', function() {
          }}`,
             pas: [{flag: 1, flag2: 1}, null, {flag: 1}, {flag2: 1}],
             exp: ['12', '', '1', '']
+        },
+        {
+            src: '{{a}} {{=d.a}}',
+            pas: [{a: '/\\"\'<> \t&'}],
+            exp: ['/\\&quot;&#39;&lt;&gt; \t&amp; /\\"\'<> \t&']
         }
     ];
 
