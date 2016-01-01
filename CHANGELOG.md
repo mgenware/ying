@@ -1,4 +1,11 @@
 # ying ChangeLog
+## 0.1.2 2016-1-1
+* Improve performance by removing fs.readFileSync calls.
+* Use `escape-html` to escape characters for HTML.
+
+## 0.1.1 2015-11-30
+* Fix a critical character escaping issue.
+
 ## 0.1.0 2015-11-29
 * **(Breaking)** Remove opt.multiline, multiline expression is enabled by default.
 * Fix compilation error when using ES6 expression.
