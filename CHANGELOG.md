@@ -1,4 +1,7 @@
 # ying ChangeLog
+## 0.2.0 2016-1-3
+* Add direct code injection operator "~".
+
 ## 0.1.2 2016-1-1
 * Improve performance by removing `fs.readFileSync` calls.
 * Use `escape-html` to escape characters for HTML.

@@ -96,3 +96,9 @@ Output the full generated HTML:
 ```html
 <html><head><title>Title of this page</title><body><h1>Mgen</h1><p>hello</p></body></html>
 ```
+
+# ChangeLog
+[CHANGELOG.md](CHANGELOG.md)
+
+# License
+MIT
