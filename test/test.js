@@ -87,6 +87,11 @@ describe('ying test', function() {
             src: '{{a}} {{=d.a}}',
             pas: [{a: '/\\"\'<> \t&'}],
             exp: ['/\\&quot;&#39;&lt;&gt; \t&amp; /\\"\'<> \t&']
+        },
+        {
+            src: '{{~ if(d.flag){ }}{{= _e(d.trueValue)}}{{~ }else{ }}{{falseValue}}{{~ } }}',
+            pas: [{flag: true, trueValue: '<true>', falseValue: '<false>'}, {trueValue: '<true>', falseValue: '<false>'}],
+            exp: ['&lt;true&gt;', '&lt;false&gt;']
         }
     ];
 
