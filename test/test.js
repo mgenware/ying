@@ -92,6 +92,11 @@ describe('ying test', function() {
             src: '{{~ if(d.flag){ }}{{= _e(d.trueValue)}}{{~ }else{ }}{{falseValue}}{{~ } }}',
             pas: [{flag: true, trueValue: '<true>', falseValue: '<false>'}, {trueValue: '<true>', falseValue: '<false>'}],
             exp: ['&lt;true&gt;', '&lt;false&gt;']
+        },
+        {
+            src: `{{~ if(d.root){ }}1{{~ if(d.nested){ }}2{{~ } }}{{~ } }}`,
+            pas: [{root: true}, {root: true, nested: true}, {}, {nested: true}],
+            exp: ['1', '12', '', '']
         }
     ];
 
