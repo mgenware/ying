@@ -1,4 +1,10 @@
 # ying
+
+[![Build Status](https://travis-ci.org/mgenware/ying.svg?branch=master)](http://travis-ci.org/mgenware/ying)
+[![NPM Version](http://img.shields.io/node/v/ying.svg)](https://www.npmjs.org/package/ying)
+[![NPM Downloads](https://img.shields.io/npm/dm/ying.svg)](https://www.npmjs.org/package/ying)
+
+
 Another simple Node.js template engine.
 
 ## Installation
@@ -14,7 +20,7 @@ npm test
 
 # Usage
 * `ying.compile(templateStr, opt)` compiles a template string to a JavaScript function. Available options:
-    * `logging` if true, show debugging logs on standard output. 
+    * `logging` if true, show debugging logs on standard output.
 
 * `{{xxx}}` reference a property named 'xxx' and escape its value for HTML.
 
