@@ -23,5 +23,6 @@
   },
   "scripts": {
     "test": "mocha --reporter spec"
-  }
+  },
+  "engines" : { "node" : ">=4.0.0" }
 }
