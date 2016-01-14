@@ -1,4 +1,7 @@
 # ying ChangeLog
+## 0.2.1 2016-1-14
+* Add `engines` field to package.json.
+
 ## 0.2.0 2016-1-3
 * Add direct code injection operator "~".
 
