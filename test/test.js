@@ -1,11 +1,8 @@
 var ying = require('../lib/main');
 var assert = require('assert');
 
-var groupIndex = 1;
-var specIndex = 1;
-
-function run_spec(func, pas, result, name) {
-    it(`Group[${groupIndex}] Spec[${specIndex}] ${name}`, function () {
+function run_spec(func, pas, result, name, groupIndex, specIndex) {
+    it(`Group(${groupIndex}) "${name}"(${specIndex})`, function () {
         assert.equal(func(pas), result);
     });
 }
@@ -119,13 +116,15 @@ describe('ying test', function() {
         }
     ];
 
+    var groupIndex = 1;
     specData.forEach(function (specItem) {
+        var specIndex = 1;
         var func = ying.compile(specItem.src);
         var exp = specItem.exp;
         var name = specItem.n;
 
         specItem.pas.forEach(function (pasItem, index) {
-            run_spec(func, pasItem, exp[index], name);
+            run_spec(func, pasItem, exp[index], name, groupIndex, specIndex);
             specIndex++;
         });
 
