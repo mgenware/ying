@@ -1,7 +1,8 @@
 # ying
 
+[![npm version](https://badge.fury.io/js/ying.svg)](https://badge.fury.io/js/ying)
+[![Node.js Version](http://img.shields.io/node/v/ying.svg)](https://nodejs.org/en/)
 [![Build Status](https://travis-ci.org/mgenware/ying.svg?branch=master)](http://travis-ci.org/mgenware/ying)
-[![NPM Version](http://img.shields.io/node/v/ying.svg)](https://www.npmjs.org/package/ying)
 [![NPM Downloads](https://img.shields.io/npm/dm/ying.svg)](https://www.npmjs.org/package/ying)
 
 
