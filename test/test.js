@@ -110,6 +110,12 @@ describe('ying test', function() {
             src: `{{~ if(d.root){ }}1{{~ if(d.nested){ }}2{{~ } }}{{~ } }}`,
             pas: [{root: true}, {root: true, nested: true}, {}, {nested: true}],
             exp: ['1', '12', '', '']
+        },
+        {
+            n: '{{ }} with unspecified properties',
+            src: `{{a}}{{b}}{{c}}`,
+            pas: [{}, {b: 123}],
+            exp: ['', '123']
         }
     ];
 
