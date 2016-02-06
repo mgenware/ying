@@ -6,7 +6,7 @@
 [![NPM Downloads](https://img.shields.io/npm/dm/ying.svg)](https://www.npmjs.org/package/ying)
 
 
-Another simple Node.js template engine.
+Another simple Node.js template engine, requires Node.js 4.0 or higher.
 
 ## Installation
 ```
