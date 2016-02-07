@@ -13,17 +13,15 @@ Another simple Node.js template engine, requires Node.js 4.0 or higher.
 npm install ying
 ```
 
-## Run tests
-```
-npm test
-```
-*This project is tested on Node.js 4.1.1*
+# Quick Start
+## Compiling a template
+use `ying.compile(templateStr, opt)` to compile a template string into a JavaScript function.
+* `templateStr` template string.
+* `opt` options:
+   * `logging` if true, show debugging logs on standard output.
 
-# Usage
-* `ying.compile(templateStr, opt)` compiles a template string to a JavaScript function. Available options:
-    * `logging` if true, show debugging logs on standard output.
-
-* `{{xxx}}` reference a property named 'xxx' and escape its value for HTML.
+## Getting property values using `{{prop}}`
+Use `{{prop}}` to get a property value and encode its content into valid HTML.
 
 Example:
 ```javascript
@@ -38,43 +36,75 @@ Output:
 <p>Mgen &gt;&gt;&gt;</p>
 ```
 
+## Embedding a JavaScript Expression using `{{= expr}}`
 
-* `{{= }}` embeds a JavaScript expression inside template string.
-* `d.<property>` references properties in user argument(so `d` is a reserved word inside template JavaScript expressions).
-* `_e(str)` use this to escape string for HTML inside template(so `_e` is a reserved word inside template JavaScript expressions).
-
-Example:
-```javascript
+* Basic example
+```js
 var ying = require('ying');
 
-// Embeds a JavaScript expression (use d to reference arguments, _e(str) to escape string for HTML))
-var func = ying.compile('<p>{{= _e(d.id ? d.id + "~" + d.name : d.error) }}</p>');
-console.log(func({id: 123, name: 'Mgen >>>'}));
-console.log(func({error: 'Fun with ying'}));
+var func = ying.compile('{{= "Current date: " + new Date() }}');
+console.log(func());
 ```
 
 Output:
-```html
-<p>123~Mgen &gt;&gt;&gt;</p>
-<p>Fun with ying</p>
+```
+Current date: Sun Feb 07 2016 10:12:49 GMT+0800 (CST)
 ```
 
-
-* `{{# }}` defines a mini-function to return something.
-
+* The variable `d` is the user arguments passed to template function.
 Example:
-```javascript
+```js
 var ying = require('ying');
 
-// Embeds a JavaScript function (use d to reference arguments, _e(str) to escape string for HTML))
-// Populates an HTML list
-var func = ying.compile('<ul>{{# var s = ""; for(var i in d.users) s += "<li>" + _e(d.users[i]) + "</li>"; return s; }}</ul>');
-console.log(func({users: ['aaa', 'b', 'cccc', 'dd']}));
+var func = ying.compile('{{= d.name || "<None>"}}');
+console.log(func({name: 'Mgen >>>'}));
+console.log(func());
 ```
 
 Output:
-```html
-<ul><li>aaa</li><li>b</li><li>cccc</li><li>dd</li></ul>
+```
+Mgen >>>
+<None>
+```
+
+* To escape text for HTML inside expression, use the function `_e(str)`.
+Example:
+```js
+var ying = require('ying');
+
+var func = ying.compile('{{= _e(d.name || "<None>")}}');
+console.log(func({name: 'Mgen >>>'}));
+console.log(func());
+```
+
+Output:
+```
+Mgen &gt;&gt;&gt;
+&lt;None&gt;
+```
+
+## Embedding a JavaScript Function using `{{# body}}`
+Example(using for loops to populate an HTML list):
+```js
+var ying = require('ying');
+
+// Here we use ES6 Template strings which supports multi-line strings
+var func = ying.compile(`<ul>{{#
+    if (!d.users) {
+        return "<li>No users available</li>"
+    }
+    var result = "";
+    for(var user of d.users) {
+        result += "<li>" + _e(user) + "</li>";
+    }
+    return result;
+}}</ul>`);
+console.log(func({users: ['Mgen', '<ABC>', '123']}));
+```
+
+Output:
+```
+<ul><li>Mgen</li><li>&lt;ABC&gt;</li><li>123</li></ul>
 ```
 
 # More Examples
