@@ -22,8 +22,6 @@ use `ying.compile(templateStr, opt)` to compile a template string into a JavaScr
 
 ## Getting property values using `{{prop}}`
 Use `{{prop}}` to get a property value and encode its content into valid HTML.
-
-**Example**
 ```javascript
 var ying = require('ying');
 
@@ -37,8 +35,6 @@ Output:
 ```
 
 ## Embedding a JavaScript Expression using `{{= expr}}`
-
-**Basic example**
 ```js
 var ying = require('ying');
 
@@ -52,7 +48,6 @@ Current date: Sun Feb 07 2016 10:12:49 GMT+0800 (CST)
 ```
 
 **The variable `d` is the user arguments passed to template function.**
-Example:
 ```js
 var ying = require('ying');
 
@@ -68,7 +63,6 @@ Mgen >>>
 ```
 
 **To escape text for HTML inside expression, use the function `_e(str)`.**
-Example:
 ```js
 var ying = require('ying');
 
@@ -84,7 +78,7 @@ Mgen &gt;&gt;&gt;
 ```
 
 ## Embedding a JavaScript Function using `{{# body}}`
-**Example(using for loops to populate an HTML list):**
+Populate an HTML list using for loops.
 ```js
 var ying = require('ying');
 
@@ -110,7 +104,6 @@ Output:
 # More Examples
 ## Composite Template(Includes)
 ying can also accomplish something like [Jade's Includes](http://jade-lang.com/reference/includes/).
-Sample code:
 ```javascript
 var ying = require('ying');
 
