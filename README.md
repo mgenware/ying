@@ -16,14 +16,14 @@ npm install ying
 # Quick Start
 ## Compiling a template
 use `ying.compile(templateStr, opt)` to compile a template string into a JavaScript function.
-* `templateStr` template string.
-* `opt` options:
+* `templateStr` the template string.
+* `opt` available options:
    * `logging` if true, show debugging logs on standard output.
 
 ## Getting property values using `{{prop}}`
 Use `{{prop}}` to get a property value and encode its content into valid HTML.
 
-Example:
+**Example**
 ```javascript
 var ying = require('ying');
 
@@ -38,7 +38,7 @@ Output:
 
 ## Embedding a JavaScript Expression using `{{= expr}}`
 
-* Basic example
+**Basic example**
 ```js
 var ying = require('ying');
 
@@ -51,7 +51,7 @@ Output:
 Current date: Sun Feb 07 2016 10:12:49 GMT+0800 (CST)
 ```
 
-* The variable `d` is the user arguments passed to template function.
+**The variable `d` is the user arguments passed to template function.**
 Example:
 ```js
 var ying = require('ying');
@@ -67,7 +67,7 @@ Mgen >>>
 <None>
 ```
 
-* To escape text for HTML inside expression, use the function `_e(str)`.
+**To escape text for HTML inside expression, use the function `_e(str)`.**
 Example:
 ```js
 var ying = require('ying');
@@ -84,7 +84,7 @@ Mgen &gt;&gt;&gt;
 ```
 
 ## Embedding a JavaScript Function using `{{# body}}`
-Example(using for loops to populate an HTML list):
+**Example(using for loops to populate an HTML list):**
 ```js
 var ying = require('ying');
 
