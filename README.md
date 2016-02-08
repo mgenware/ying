@@ -21,7 +21,7 @@ use `ying.compile(templateStr, opt)` to compile a template string into a JavaScr
    * `logging` if true, show debugging logs on standard output.
 
 ## Getting property values using `{{prop}}`
-Use `{{prop}}` to get a property value and encode its content into valid HTML.
+**Use `{{prop}}` to get a property value and encode its content into valid HTML.**
 ```javascript
 var ying = require('ying');
 
@@ -78,7 +78,7 @@ Mgen &gt;&gt;&gt;
 ```
 
 ## Embedding a JavaScript Function using `{{# body}}`
-Populate an HTML list using for loops.
+**Populate an HTML list using `for` loops.**
 ```js
 var ying = require('ying');
 
@@ -99,6 +99,33 @@ console.log(func({users: ['Mgen', '<ABC>', '123']}));
 Output:
 ```
 <ul><li>Mgen</li><li>&lt;ABC&gt;</li><li>123</li></ul>
+```
+
+## Direct code injection using `{{~ code}}`
+**`if-else` code blocks.**
+```js
+var ying = require('ying');
+
+// Here we use ES6 Template strings which supports multi-line strings
+var func = ying.compile(`
+    {{~ if(d.os == 'ios') { }}
+        <p>You are using iOS</p>
+    {{~ } else if(d.os == 'android') { }}
+        <p>You are using Android</p>
+    {{~ } else { }}
+        <p>Unknown OS</p>
+    {{~ } }}
+`);
+console.log(func({os: 'ios'}));
+console.log(func({os: 'android'}));
+console.log(func({os: 'wp'}));
+```
+
+Output:
+```
+<p>You are using iOS</p>
+<p>You are using Android</p>
+<p>Unknown OS</p>
 ```
 
 # More Examples
