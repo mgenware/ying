@@ -10,7 +10,7 @@ Another simple Node.js template engine, requires Node.js 4.0 or higher.
 
 ## Installation
 ```
-npm install ying
+npm install ying --save
 ```
 
 # Quick Start
