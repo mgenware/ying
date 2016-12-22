@@ -1,4 +1,7 @@
 # ying ChangeLog
+## 0.2.2 2016-12-21
+* Fix the warning "DeprecationWarning: 'GLOBAL' is deprecated, use 'global'".
+
 ## 0.2.1 2016-1-14
 * Add `engines` field to package.json.
 
