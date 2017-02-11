@@ -1,4 +1,7 @@
 # ying ChangeLog
+## 1.0.0 2017-02-11
+* Release 1.0
+
 ## 0.2.2 2016-12-21
 * Fix the warning "DeprecationWarning: 'GLOBAL' is deprecated, use 'global'".
 
