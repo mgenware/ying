@@ -22,7 +22,7 @@ use `ying.compile(templateStr, opt)` to compile a template string into a JavaScr
 
 ## Getting property values using `{{prop}}`
 **Use `{{prop}}` to get a property value and encode its content into valid HTML.**
-```javascript
+```js
 var ying = require('ying');
 
 var func = ying.compile('<p>{{name}}</p>');
@@ -32,6 +32,23 @@ console.log(func({name: 'Mgen >>>'}));
 Output:
 ```html
 <p>Mgen &gt;&gt;&gt;</p>
+```
+
+**Nested properties** are also supported.
+```js
+var ying = require('ying');
+
+var func = ying.compile('<p>{{client.os.name}}</p>');
+console.log(func({client: {
+  os: {
+    name: 'linux'
+  }
+}}));
+```
+
+Output:
+```
+<p>linux</p>
 ```
 
 ## Embedding a JavaScript Expression using `{{= expr}}`
@@ -84,14 +101,14 @@ var ying = require('ying');
 
 // Here we use ES6 Template strings which supports multi-line strings
 var func = ying.compile(`<ul>{{#
-    if (!d.users) {
-        return "<li>No users available</li>"
-    }
-    var result = "";
-    for(var user of d.users) {
-        result += "<li>" + _e(user) + "</li>";
-    }
-    return result;
+  if (!d.users) {
+    return "<li>No users available</li>"
+  }
+  var result = "";
+  for(var user of d.users) {
+    result += "<li>" + _e(user) + "</li>";
+  }
+  return result;
 }}</ul>`);
 console.log(func({users: ['Mgen', '<ABC>', '123']}));
 ```
@@ -108,13 +125,13 @@ var ying = require('ying');
 
 // Here we use ES6 Template strings which supports multi-line strings
 var func = ying.compile(`
-    {{~ if(d.os == 'ios') { }}
-        <p>You are using iOS</p>
-    {{~ } else if(d.os == 'android') { }}
-        <p>You are using Android</p>
-    {{~ } else { }}
-        <p>Unknown OS</p>
-    {{~ } }}
+  {{~ if(d.os == 'ios') { }}
+    <p>You are using iOS</p>
+  {{~ } else if(d.os == 'android') { }}
+    <p>You are using Android</p>
+  {{~ } else { }}
+    <p>Unknown OS</p>
+  {{~ } }}
 `);
 console.log(func({os: 'ios'}));
 console.log(func({os: 'android'}));
@@ -141,9 +158,9 @@ var childTemplate = ying.compile('<h1>{{name}}</h1><p>{{description}}</p>');
 
 // 2 data object, each for their own template function
 function compositeTemplate(parentData, childData) {
-    // setting result of childTemplate to parentData.page_content
-    parentData.page_content = childTemplate(childData);
-    return parentTemplate(parentData);
+  // setting result of childTemplate to parentData.page_content
+  parentData.page_content = childTemplate(childData);
+  return parentTemplate(parentData);
 }
 
 var result = compositeTemplate({page_title: 'Title of this page'}, {name: 'Mgen', description: 'hello'});

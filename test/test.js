@@ -113,6 +113,12 @@ describe('ying test', function() {
       src: '{{a}}{{b}}{{c}}',
       pas: [{}, {b: 123}],
       exp: ['', '123']
+    },
+    {
+      n: 'Nested properties',
+      src:'{{client.os.name}}',
+      pas: [{client: {os: {name: 'linux'}}}],
+      exp: ['linux']
     }
   ];
 
