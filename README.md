@@ -7,7 +7,7 @@
 Another simple Node.js template engine.
 
 > **Warning**  
-> This library uses `new Function` (which uses `eval`) to compile template code. You should sanitize the data when dealing with user input.
+> Node.js only, **not for browsers**. This library uses `new Function` (which uses `eval`) to compile template code. You should sanitize the data when dealing with user input.
 
 ## Installation
 
@@ -172,37 +172,36 @@ Output:
 <p>Unknown OS</p>
 ```
 
-## More examples
+### TypeScript generics support
 
-### Composite templates
+You can customize the parameter type of a template function in TypeScript, example:
 
-ying can also accomplish something like [Jade's Includes](http://jade-lang.com/reference/includes/).
+```ts
+import ying from './main.js';
 
-```js
-import ying from 'ying';
-
-// Create 2 template functions.
-// page_content in parentTemplate will be set by result of childTemplate
-const parentTemplate = ying(
-  '<html><head><title>{{page_title}}</title><body>{{=d.page_content}}</body></html>',
-);
-const childTemplate = ying('<h1>{{name}}</h1><p>{{description}}</p>');
-
-function compositeTemplate(parentData, childData) {
-  // setting result of childTemplate to parentData.page_content
-  parentData.page_content = childTemplate(childData);
-  return parentTemplate(parentData);
+// Page template.
+interface PageTemplateData {
+  title: string;
+  contentHTML: string;
 }
-
-var result = compositeTemplate(
-  { page_title: 'Title of this page' },
-  { name: 'hi', description: 'hello' },
+const pageTemplate = ying<PageTemplateData>(
+  '<html><head><title>{{title}}</title><body>{{=d.contentHTML}}</body></html>',
 );
-console.log(result);
+
+// Content template.
+interface ContentTemplateData {
+  name: string;
+  description: string;
+}
+const contentTemplate = ying<ContentTemplateData>('<h1>{{name}}</h1><p>{{description}}</p>');
+
+const contentHTML = contentTemplate({ name: 'hi', description: 'there>>' });
+const pageHTML = pageTemplate({ title: '<My website>', contentHTML });
+console.log(pageHTML);
 ```
 
 Output:
 
 ```html
-<html><head><title>Title of this page</title><body><h1>hi</h1><p>hello</p></body></html>
+<html><head><title>&lt;My website&gt;</title><body><h1>hi</h1><p>there&gt;&gt;</p></body></html>
 ```

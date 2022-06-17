@@ -13,12 +13,12 @@ interface Token {
   type: TokenType;
 }
 
-export type YingFunc = (arg: unknown) => string;
+export type YingFunc<T> = (arg: T) => string;
 
 // eslint-disable-next-line no-underscore-dangle, @typescript-eslint/no-explicit-any
 (global as any)._e = (html: string) => escapeHtml(html);
 
-export default function compile(str: string): YingFunc {
+export default function compile<T = unknown>(str: string): YingFunc<T> {
   const regex = REGEX_MULTILINE;
   let match = regex.exec(str);
   let idx = 0;
@@ -72,5 +72,5 @@ export default function compile(str: string): YingFunc {
   funcBody += 'return res;';
 
   // eslint-disable-next-line @typescript-eslint/no-implied-eval
-  return new Function('d', funcBody) as YingFunc;
+  return new Function('d', funcBody) as YingFunc<T>;
 }

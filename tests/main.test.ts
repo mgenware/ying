@@ -150,3 +150,12 @@ testItems.forEach((item) => {
 
   groupIndex++;
 });
+
+interface Param {
+  name: string;
+}
+
+it('Generics', () => {
+  const func = ying<Param>('{{name}}');
+  assert.strictEqual(func({ name: '>>' }), '&gt;&gt;');
+});
