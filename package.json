@@ -1,28 +1,47 @@
 {
   "name": "ying",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "Another simple Node.js template engine",
-  "main": "lib/main.js",
-  "author": "Mgen (https://www.mgenware.com)",
+  "type": "module",
+  "exports": "./dist/main.js",
+  "types": "./dist/main.d.ts",
+  "author": "Mgenware (https://github.com/mgenware)",
   "homepage": "https://github.com/mgenware/ying",
   "bugs": "https://github.com/mgenware/ying/issues",
-  "keywords": [
-    "template engine"
-  ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/mgenware/ying.git"
+    "url": "https://github.com/mgenware/ying"
   },
-  "license": "MIT",
-  "dependencies": {
-    "escape-html": "^1.0.3",
-    "js-string-escape": "^1.0.0"
-  },
-  "devDependencies": {
-    "mocha": "*"
-  },
+  "license": "BSD-3-Clause",
   "scripts": {
-    "test": "mocha --reporter spec"
+    "test": "daizong build"
   },
-  "engines" : { "node" : ">=4.0.0" }
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "files": [
+    "dist/**/*.js",
+    "dist/**/*.ts",
+    "dist/**/*.html",
+    "dist/**/*.css",
+    "dist/**/*.map"
+  ],
+  "devDependencies": {
+    "@types/escape-html": "^1.0.2",
+    "@types/mocha": "^9.1.1",
+    "@types/node": "^18.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.28.0",
+    "@typescript-eslint/parser": "^5.28.0",
+    "daizong": "^0.23.2",
+    "eslint": "^8.17.0",
+    "eslint-config-mgenware": "^0.8.0",
+    "eslint-plugin-import": "^2.26.0",
+    "mgenware-tsconfig-node": "^14.2.0",
+    "mocha": "^10.0.0",
+    "source-map-support": "^0.5.21",
+    "typescript": "^4.7.3"
+  },
+  "dependencies": {
+    "escape-html": "^1.0.3"
+  }
 }
