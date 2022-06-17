@@ -6,13 +6,13 @@
 
 Another simple Node.js template engine.
 
-> **Warning**
+> **Warning**  
 > This library uses `new Function` (which uses `eval`) to compile template code. You should sanitize the data when dealing with user input.
 
 ## Installation
 
 ```
-npm install ying --save
+npm i ying
 ```
 
 # Usage
