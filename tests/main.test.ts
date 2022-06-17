@@ -126,7 +126,7 @@ const testItems: SpecItem[] = [
 ];
 
 function runSpec(
-  func: Function,
+  func: (arg: unknown) => string,
   pas: unknown,
   result: string,
   name: string,
