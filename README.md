@@ -15,9 +15,9 @@ Another simple Node.js template engine.
 npm i ying
 ```
 
-# Usage
+## Usage
 
-## Compiling a template
+### Compiling a template
 
 ```js
 import ying from 'ying';
@@ -27,9 +27,9 @@ const templateFunc = ying('<template>');
 
 Use `ying(templateStr)` to compile a template string into a JavaScript function.
 
-## Get a property value with `{{prop}}`
+### Get a property value with `{{prop}}`
 
-> `{{prop}}` automatically encode the property value into valid HTML.
+> `{{prop}}` automatically encodes the property value into valid HTML.
 
 ```js
 import ying from 'ying';
@@ -67,7 +67,7 @@ Output:
 <p>linux</p>
 ```
 
-## Embed a JavaScript Expression with `{{= expr}}`
+### Embed a JavaScript Expression with `{{= expr}}`
 
 ```js
 import ying from 'ying';
@@ -116,7 +116,7 @@ hi &gt;&gt;&gt;
 &lt;None&gt;
 ```
 
-## Embed a JavaScript Function with `{{# body}}`
+### Embed a JavaScript Function with `{{# body}}`
 
 Example, populate an HTML list using `for` loops:
 
@@ -143,7 +143,7 @@ Output:
 <ul><li>hi</li><li>&lt;ABC&gt;</li><li>123</li></ul>
 ```
 
-## Direct code injection with `{{~ code}}`
+### Direct code injection with `{{~ code}}`
 
 Example, `if-else` code blocks:
 
@@ -172,23 +172,22 @@ Output:
 <p>Unknown OS</p>
 ```
 
-# More Examples
+## More examples
 
-## Composite templates
+### Composite templates
 
 ying can also accomplish something like [Jade's Includes](http://jade-lang.com/reference/includes/).
 
 ```js
 import ying from 'ying';
 
-// Create 2 template functions
+// Create 2 template functions.
 // page_content in parentTemplate will be set by result of childTemplate
-var parentTemplate = ying(
+const parentTemplate = ying(
   '<html><head><title>{{page_title}}</title><body>{{=d.page_content}}</body></html>',
 );
-var childTemplate = ying('<h1>{{name}}</h1><p>{{description}}</p>');
+const childTemplate = ying('<h1>{{name}}</h1><p>{{description}}</p>');
 
-// 2 data object, each for their own template function
 function compositeTemplate(parentData, childData) {
   // setting result of childTemplate to parentData.page_content
   parentData.page_content = childTemplate(childData);
