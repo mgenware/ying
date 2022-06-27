@@ -123,6 +123,18 @@ const testItems: SpecItem[] = [
     pas: [{ client: { os: { name: 'linux' } } }],
     exp: ['linux'],
   },
+  {
+    n: 'Nested properties, wrong path',
+    src: '{{client.__not_exist__}} abc {{client.os.name}}',
+    pas: [{ client: { os: { name: 'linux' } } }],
+    exp: [' abc linux'],
+  },
+  {
+    n: 'Nested properties, wrong path',
+    src: '{{__not_exist__}}abc {{client.os.name}}',
+    pas: [{ client: { os: { name: 'linux' } } }],
+    exp: ['abc linux'],
+  },
 ];
 
 function runSpec(

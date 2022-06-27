@@ -17,15 +17,15 @@ npm i ying
 
 ## Usage
 
-### Compiling a template
+### Compile a template
+
+Use `ying(templateStr)` to compile a template string into a JavaScript function:
 
 ```js
 import ying from 'ying';
 
-const templateFunc = ying('<template>');
+const templateFunc = ying('<template string>');
 ```
-
-Use `ying(templateStr)` to compile a template string into a JavaScript function.
 
 ### Get a property value with `{{prop}}`
 
