@@ -28,6 +28,7 @@
   ],
   "devDependencies": {
     "@types/escape-html": "^1.0.2",
+    "@types/markdown-it": "^12.2.3",
     "@types/mocha": "^10.0.1",
     "@types/node": "^18.0.0",
     "@typescript-eslint/eslint-plugin": "^5.28.0",
@@ -42,6 +43,7 @@
     "typescript": "^5.0.4"
   },
   "dependencies": {
-    "escape-html": "^1.0.3"
+    "escape-html": "^1.0.3",
+    "markdown-it": "^13.0.1"
   }
 }

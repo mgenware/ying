@@ -135,6 +135,30 @@ const testItems: SpecItem[] = [
     pas: [{ client: { os: { name: 'linux' } } }],
     exp: ['abc linux'],
   },
+  {
+    n: 'Markdown',
+    src: '{{= _markdown(d.md)}}',
+    pas: [
+      {
+        md: `# abc
+
+- 1
+- 2
+- 3
+
+<blockquote>haha</blockquote>`,
+      },
+    ],
+    exp: [
+      `<h1>abc</h1>
+<ul>
+<li>1</li>
+<li>2</li>
+<li>3</li>
+</ul>
+<blockquote>haha</blockquote>`,
+    ],
+  },
 ];
 
 function runSpec(

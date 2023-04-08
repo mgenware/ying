@@ -1,7 +1,9 @@
 /* eslint-disable prefer-template */
 import escapeHtml from 'escape-html';
+import MarkdownDownIt from 'markdown-it';
 
 const REGEX_MULTILINE = /{{([\s\S]*?)}}/g;
+const md = MarkdownDownIt({ html: true });
 
 enum TokenType {
   text,
@@ -17,6 +19,8 @@ export type YingFunc<T> = (arg: T) => string;
 
 // eslint-disable-next-line no-underscore-dangle, @typescript-eslint/no-explicit-any
 (global as any)._e = (html: string) => escapeHtml(html);
+// eslint-disable-next-line no-underscore-dangle, @typescript-eslint/no-explicit-any
+(global as any)._markdown = (html: string) => md.render(html);
 
 export default function compile<T = unknown>(str: string): YingFunc<T> {
   const regex = REGEX_MULTILINE;
