@@ -18,9 +18,9 @@ interface Token {
 export type YingFunc<T> = (arg: T) => string;
 
 // eslint-disable-next-line no-underscore-dangle, @typescript-eslint/no-explicit-any
-(global as any)._e = (html: string) => escapeHtml(html);
+(globalThis as any)._e = (html: string) => escapeHtml(html);
 // eslint-disable-next-line no-underscore-dangle, @typescript-eslint/no-explicit-any
-(global as any)._markdown = (html: string) => md.render(html);
+(globalThis as any)._markdown = (html: string) => md.render(html);
 
 export default function compile<T = unknown>(str: string): YingFunc<T> {
   const regex = REGEX_MULTILINE;
@@ -35,7 +35,7 @@ export default function compile<T = unknown>(str: string): YingFunc<T> {
     }
 
     tokens.push({ val: match[1] ?? '', type: TokenType.cmd });
-    idx = match.index + (match[0]?.length ?? 0);
+    idx = match.index + match[0].length;
 
     match = regex.exec(str);
   }
