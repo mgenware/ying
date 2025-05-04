@@ -7,3 +7,5 @@ dist_tests/
 *.seed
 
 .DS_Store
+package-lock.json
+pnpm-lock.yaml
